@@ -1,9 +1,6 @@
 hello
-* [choice yueahh]
-    response
-    * * [response2]
-        answer
-
-* [choice 2]
-    pee
-    
+this is some dialogue, speaking n stuff u know? yeah u know 
+* [woah a choice!]
+yeah
+* [woah a different choice]
+no

@@ -1,0 +1,1 @@
+﻿{"inkVersion":20,"root":[["^Alchemist! I need you to make a health potion","\n","^Here, have the ingredient list.","\n","ev",{"f()":"setAction"},"pop","/ev","\n","end",["done",{"#f":5,"#n":"g-0"}],null],"done",{"setAction":["ev",true,"/ev",{"VAR=":"action","re":true},{"#f":1}],"global decl":["ev",false,{"VAR=":"action"},"/ev","end",null],"#f":1}],"listDefs":{}}
