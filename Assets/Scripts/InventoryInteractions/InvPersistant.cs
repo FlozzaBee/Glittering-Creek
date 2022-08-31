@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InvPersistant : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class InvPersistant : MonoBehaviour
     public List<string> invItemNames;
 
     //Current target recipe
-    public string currentRecipe;
+    public TextMeshProUGUI currentRecipe;
     public static InvPersistant Instance;
     private void Awake()
     {

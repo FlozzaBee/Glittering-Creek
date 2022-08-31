@@ -71,6 +71,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""536e03bd-4ad5-4205-8b34-3ced545d8513"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -282,6 +291,17 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""action"": ""ScrollDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c151275f-9441-490b-92a8-34bd17ff051c"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -295,6 +315,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         m_MainInput_NumberKeys = m_MainInput.FindAction("NumberKeys", throwIfNotFound: true);
         m_MainInput_ScrollUp = m_MainInput.FindAction("ScrollUp", throwIfNotFound: true);
         m_MainInput_ScrollDown = m_MainInput.FindAction("ScrollDown", throwIfNotFound: true);
+        m_MainInput_MousePosition = m_MainInput.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +380,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_MainInput_NumberKeys;
     private readonly InputAction m_MainInput_ScrollUp;
     private readonly InputAction m_MainInput_ScrollDown;
+    private readonly InputAction m_MainInput_MousePosition;
     public struct MainInputActions
     {
         private @InputSystem m_Wrapper;
@@ -368,6 +390,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         public InputAction @NumberKeys => m_Wrapper.m_MainInput_NumberKeys;
         public InputAction @ScrollUp => m_Wrapper.m_MainInput_ScrollUp;
         public InputAction @ScrollDown => m_Wrapper.m_MainInput_ScrollDown;
+        public InputAction @MousePosition => m_Wrapper.m_MainInput_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_MainInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -392,6 +415,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @ScrollDown.started -= m_Wrapper.m_MainInputActionsCallbackInterface.OnScrollDown;
                 @ScrollDown.performed -= m_Wrapper.m_MainInputActionsCallbackInterface.OnScrollDown;
                 @ScrollDown.canceled -= m_Wrapper.m_MainInputActionsCallbackInterface.OnScrollDown;
+                @MousePosition.started -= m_Wrapper.m_MainInputActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_MainInputActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_MainInputActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_MainInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -411,6 +437,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @ScrollDown.started += instance.OnScrollDown;
                 @ScrollDown.performed += instance.OnScrollDown;
                 @ScrollDown.canceled += instance.OnScrollDown;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
@@ -422,5 +451,6 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         void OnNumberKeys(InputAction.CallbackContext context);
         void OnScrollUp(InputAction.CallbackContext context);
         void OnScrollDown(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

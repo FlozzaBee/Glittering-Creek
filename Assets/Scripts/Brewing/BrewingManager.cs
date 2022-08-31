@@ -34,6 +34,9 @@ public class BrewingManager : MonoBehaviour
     //Internal variables
     private List<string> usedIngredients = new List<string>();
 
+    //Ingredient label on mouse hover
+    private bool isHover;
+
 
     private void Awake()
     {
@@ -115,15 +118,5 @@ public class BrewingManager : MonoBehaviour
             tryAgain.gameObject.SetActive(true);
         }
         finalPotionParent.SetActive(true);
-    }
-
-
-    public void HoverStart(BrewingIngredient ingredient)
-    {
-        Debug.Log("Started hover over " + ingredient.name);
-    }
-    public void HoverEnd(BrewingIngredient ingredient)
-    {
-        Debug.Log("ended hover");
     }
 }
