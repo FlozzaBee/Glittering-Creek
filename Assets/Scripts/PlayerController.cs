@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     //Interaction 
     private bool isInIteraction = false;
     private GameObject interactiveObject;
+    //Animation
+    private Animator animator;
 
     //Editor Variables
     [Header("Input Variables")]
@@ -31,12 +33,14 @@ public class PlayerController : MonoBehaviour
     [Header("Interactions")]
     [Tooltip("The bubble that appears when youre in range of an interaction")]
     public GameObject interactIcon;
+    public GameObject pickUpIcon;
     public InkTest inkTest;
     public InvManager invManager;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
         movement = playerInput.actions["Movement"];
         interact = playerInput.actions["Interact"];
         numKeys = playerInput.actions["NumberKeys"];
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("movement started");
             isMove = true;
+            animator.SetBool("isWalking", true);
             StartCoroutine(Movement());
         }
     }
@@ -84,6 +89,8 @@ public class PlayerController : MonoBehaviour
             Vector2 inputVector = movement.ReadValue<Vector2>();
             Vector3 inputVector3 = inputVector;
             GetComponent<Rigidbody2D>().MovePosition(transform.position + (inputVector3 * Time.deltaTime * playerSpeed));
+            animator.SetFloat("xInput", inputVector.x);
+            animator.SetFloat("yInput", inputVector.y);
             yield return new WaitForFixedUpdate();
         }
     }
@@ -92,6 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("movement ended");
         isMove = false;
+        animator.SetBool("isWalking", false);
     }
 
     private void Interact(InputAction.CallbackContext context)
@@ -155,7 +163,9 @@ public class PlayerController : MonoBehaviour
             if (data.label != null)
             {
                 data.ShowLabel(true);
+                
             }
+            pickUpIcon.SetActive(true);
             isInIteraction = true;
             interactiveObject = collision.gameObject;
         }
@@ -175,7 +185,9 @@ public class PlayerController : MonoBehaviour
             if (data.label != null)
             {
                 data.ShowLabel(false);
+                
             }
+            pickUpIcon.SetActive(false);
             isInIteraction = false;
             interactiveObject = null;
         }

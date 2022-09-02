@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //applies a zdepth dependent on the y hight in the screen, allowing for dynamic sorting of sprites
-public class zSorter : MonoBehaviour
+public class OrderSorter : MonoBehaviour
 {
     [Tooltip("Does this object move? if enabled z depth is only sorted on start")]
     public bool isStatic = true;
@@ -19,7 +19,7 @@ public class zSorter : MonoBehaviour
     {
         if (!isStatic)
         {
-            spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y);
+            spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y) + 1;
         }
     }
     
