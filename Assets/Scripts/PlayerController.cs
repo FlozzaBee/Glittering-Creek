@@ -34,8 +34,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The bubble that appears when youre in range of an interaction")]
     public GameObject interactIcon;
     public GameObject pickUpIcon;
-    public InkTest inkTest;
+    public DialogueManager inkTest;
     public InvManager invManager;
+
+    public SceneChange sceneChange;
 
     private void Awake()
     {
@@ -120,12 +122,15 @@ public class PlayerController : MonoBehaviour
                 //    Debug.Log("No InteractionData on interacted object");
                 //} // this will save me a lot of headaches later i promise
             }
-
-            if (interactiveObject.tag == "InventoryInteraction")
+            if (interactiveObject != null) //null check useful as the play dialogue method sometimes disables the dialogue after playing.
             {
-                invManager.InventoryInteract(interactiveObject);
+                if (interactiveObject.tag == "InventoryInteraction")
+                {
+                    invManager.InventoryInteract(interactiveObject);
+                }
             }
         }
+        else { Debug.Log("Interaction collider not found"); }
     }
 
     //Hotbar selection
@@ -168,6 +173,11 @@ public class PlayerController : MonoBehaviour
             pickUpIcon.SetActive(true);
             isInIteraction = true;
             interactiveObject = collision.gameObject;
+
+        }
+        if (collision.tag == "SceneChangeTrigger")
+        {
+            sceneChange.ChangeScene(collision.GetComponent<SceneTriggerData>().sceneName);
         }
     }
 
@@ -191,6 +201,24 @@ public class PlayerController : MonoBehaviour
             isInIteraction = false;
             interactiveObject = null;
         }
+        
+    }
+
+    //sets all interaction data, as if player had entered interaction trigger
+    //does not enable labels however
+    public void ForceStartInteraction(GameObject interactObj)
+    {
+        isInIteraction = true;
+        interactiveObject = interactObj; //note, forced interactions must still have a gameobject tagged with Interaction to reference.
+
+    }
+    //removes all interaction data and disables label, as if player had left interaction trigger
+    public void ForceEndInteraction()
+    {
+        interactIcon.SetActive(false);
+        pickUpIcon.SetActive(false);
+        isInIteraction = false;
+        interactiveObject = null;
     }
 
 }

@@ -22,11 +22,16 @@ public class BrewingManager : MonoBehaviour
     [Header("Final Potion")]
     public GameObject finalPotionParent;
     public TextMeshProUGUI finalPotionText;
+    public GameObject radialHighlight;
+    public Image finalPotionImage;
 
     [Header("Buttons")]
     public Button tryAgain;
     public Button brewAnother;
     public Button finishBrewing;
+
+    [Header("animation")]
+    public Animator brewingAnimator;
 
     [Header("debugging/fun")]
     public bool unlockAll = false;
@@ -107,6 +112,9 @@ public class BrewingManager : MonoBehaviour
             }
             InvPersistant.Instance.AddItem(potions[potionIndex], potionSprites[potionIndex]);
             finishBrewing.gameObject.SetActive(true);
+            finalPotionImage.gameObject.SetActive(true);
+            finalPotionImage.sprite = potionSprites[potionIndex];
+            radialHighlight.SetActive(true);
             if (InvPersistant.Instance.invItemNames.Count < 9) //Prevents brewing extra if inv full
             {
                 brewAnother.gameObject.SetActive(true);
@@ -118,5 +126,10 @@ public class BrewingManager : MonoBehaviour
             tryAgain.gameObject.SetActive(true);
         }
         finalPotionParent.SetActive(true);
+    }
+
+    public void playAnimation(string animationName)
+    {
+        brewingAnimator.SetTrigger(animationName);
     }
 }

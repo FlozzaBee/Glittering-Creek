@@ -5,13 +5,14 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine.UI;
 
-public class InkTest : MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
     
     //Editor variables
     [Header("UI component prefabs")]
     public GameObject textPrefab;
     public GameObject portraitPrefab;
+    public GameObject fullbodyPrefab;
     public GameObject uiBackground;
     public Button buttonPrefab;
 
@@ -22,6 +23,7 @@ public class InkTest : MonoBehaviour
     public Canvas dialogueCanvas;
     [Tooltip("Script attached to the player")]
     public PlayerController playerController;
+
 
     //Internal Variables
     private GameObject interactionObject;
@@ -91,10 +93,21 @@ public class InkTest : MonoBehaviour
         uiBackgroundObj.transform.SetParent(mainCanvas.transform, false);
 
         story = new Story(inkJSON.text); //assign ink JSON file to story variable
+        if (interactionData.isDelivery)
+        {
+            story.variablesState["hasDeliveryItem"] = CheckForItem();
+        }
         CreateContentView(story.Continue()); //Generates initial line of dialogue
 
         //Creates portrait, makes it child of main canvas
-        portrait = Instantiate(portraitPrefab); 
+        if(interactionData.useFullbodyPortraitPrefab)
+        {
+            portrait = Instantiate(fullbodyPrefab);
+        }
+        else
+        {
+            portrait = Instantiate(portraitPrefab);
+        }
         portrait.GetComponent<Image>().sprite = sprite;
         portrait.transform.SetParent(mainCanvas.transform, false);
 
@@ -110,6 +123,7 @@ public class InkTest : MonoBehaviour
                 isAction = (bool)action;
             });
         }
+        
     }
 
     private void ContinueStory()
@@ -131,6 +145,11 @@ public class InkTest : MonoBehaviour
             inkJSON = null;
             Destroy(portrait);
             Destroy(uiBackgroundObj);
+            if(interactionData.isSingleUse) //If the dialogue is set as single use, disable it after use.
+            {
+                interactionObject.SetActive(false);
+                playerController.ForceEndInteraction(); // disables all interaction icons and resets interaction data
+            }
             playerController.invManager.ShowHotbar(true); //unhides the hotbar
             interactionObject = null; //resets interaction object so you can interact with teh same object again
         }
@@ -188,6 +207,21 @@ public class InkTest : MonoBehaviour
     }
 
     //Observe variables and perform actions if they change
-    
+
+    public bool CheckForItem()
+    {
+        if (InvPersistant.Instance.invItemNames.Contains(interactionData.requiredItem))
+        {
+            Debug.Log("player has item required");
+            return true;
+        }
+        else { return false; }
+    }
+
+    public void DisableInteraction()
+    {
+        interactionObject.SetActive(false);
+        playerController.ForceEndInteraction(); // disables all interaction icons and resets interaction data
+    }
 
 }

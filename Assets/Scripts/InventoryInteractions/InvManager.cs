@@ -82,8 +82,13 @@ public class InvManager : MonoBehaviour
     //sets each sprite in the hotbar to that stored in the collected object sprite list
     private void UpdateHotbar()
     {
-        
-        for(int i = 0; i < InvPersistant.Instance.invItemIcons.Count; i++)
+        foreach(Image image in hotbarImages) //removes and hides each image slot in the hotbar
+        {
+            image.sprite = null;
+            image.color = new Color(1, 1, 1, 0);
+        }
+
+        for(int i = 0; i < InvPersistant.Instance.invItemIcons.Count; i++) //sets and unhides hotbar images for each item in the persistant inventory
         {
             hotbarImages[i].sprite = InvPersistant.Instance.invItemIcons[i];
             //sets the alpha to 1. 
@@ -145,5 +150,22 @@ public class InvManager : MonoBehaviour
     {
         InvPersistant.Instance.invItemNames.Add(itemName);
         InvPersistant.Instance.invItemIcons.Add(itemIcon);
+    }
+
+    public void DeliverItem(InteractionData data) //Removes the required item from inventory. Works similarly to the RemoveItems method but for only one item. 
+    {
+        int index = InvPersistant.Instance.invItemNames.IndexOf(data.requiredItem); //find the position in the inventory list of that name
+                                                                           //remove the item (name and icon) at that position
+        if (index < InvPersistant.Instance.invItemNames.Count) //checks for out of bounds, mostly to prevent errors when debuging/testing 
+        {
+            InvPersistant.Instance.invItemNames.RemoveAt(index);
+        }
+        else { Debug.Log("Used item name not found in inventory"); }
+        if (index < InvPersistant.Instance.invItemIcons.Count)
+        {
+            InvPersistant.Instance.invItemIcons.RemoveAt(index);
+        }
+        else { Debug.Log("Used item Icon not found in inventory"); }
+        UpdateHotbar();
     }
 }
