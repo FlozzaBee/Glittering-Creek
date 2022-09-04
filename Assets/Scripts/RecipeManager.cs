@@ -42,6 +42,7 @@ public class RecipeManager : MonoBehaviour
             recipeText.text = InvPersistant.Instance.currentRecipe.text;
         }
         else { Debug.Log("no current recipe in invPersistant"); }
+        Debug.Log("recipe set");
         recipeViewButton.gameObject.SetActive(true);
     }
 }

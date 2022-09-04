@@ -1,8 +1,9 @@
 VAR action = false
 
-Alchemist! I need you to make a health potion
-Here, have the ingredient list.
+Here take this recipe i found
 ~ setAction()
+
+I hope it helps!
 ->END
 
 === function setAction ===

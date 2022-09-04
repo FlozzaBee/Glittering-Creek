@@ -1138,7 +1138,7 @@ GameObject:
   - component: {fileID: 224487148}
   m_Layer: 5
   m_Name: FinalizePotion
-  m_TagString: Ingredient
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1957,7 +1957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &440310351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440310350}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3531,7 +3531,7 @@ MonoBehaviour:
   - Potion of Luck
   - glass of water
   - Mana Potion
-  - Gender Change potion
+  - gender change potion
   potionSprites:
   - {fileID: 21300000, guid: 8e76dd4bd0404a94cb1ea7d3da9f81d3, type: 3}
   - {fileID: 21300000, guid: 9d0caeef56a106a4a904c3778ccb2f86, type: 3}
@@ -3547,7 +3547,7 @@ MonoBehaviour:
   brewAnother: {fileID: 192438627}
   finishBrewing: {fileID: 911749525}
   brewingAnimator: {fileID: 586538433}
-  unlockAll: 1
+  unlockAll: 0
 --- !u!4 &936519793
 Transform:
   m_ObjectHideFlags: 0
@@ -4257,7 +4257,7 @@ GameObject:
   - component: {fileID: 1355735944}
   m_Layer: 5
   m_Name: Recipe
-  m_TagString: Ingredient
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
