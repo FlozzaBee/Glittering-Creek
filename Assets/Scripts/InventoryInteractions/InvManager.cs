@@ -152,6 +152,13 @@ public class InvManager : MonoBehaviour
         InvPersistant.Instance.invItemIcons.Add(itemIcon);
     }
 
+    public void AddItemFromPrefab(GameObject itemPrefab) //Used to add item through an event, bit of a messy solution but theres only like 24 hours left to jam submission dont judge me too harshly.
+    {
+        InvInteractData data = itemPrefab.GetComponent<InvInteractData>();
+        InvPersistant.Instance.invItemNames.Add(data.objectName);
+        InvPersistant.Instance.invItemIcons.Add(data.objectIcon); //I'm using inconsistent naming for inventory stuff, sometimes calling them objects and sometimes items, if i come back to this I should make it consistent.
+    }
+
     public void DeliverItem(InteractionData data) //Removes the required item from inventory. Works similarly to the RemoveItems method but for only one item. 
     {
         int index = InvPersistant.Instance.invItemNames.IndexOf(data.requiredItem); //find the position in the inventory list of that name

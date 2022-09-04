@@ -13,11 +13,11 @@ public class RecipeManager : MonoBehaviour
     //Animation
     public Animator recipeAnimator;
 
-    public bool setRecipeOnAwake= false;
+    //public bool setRecipeOnAwake= false;
 
     private void Awake()
     {
-        if (setRecipeOnAwake)
+        if (InvPersistant.Instance.currentRecipe != null)
         {
             SetRecipeText(InvPersistant.Instance.currentRecipe);
         }

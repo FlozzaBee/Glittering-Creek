@@ -16,6 +16,9 @@ public class SceneStart : MonoBehaviour
     public GameObject startDialogueData;
     
     public DialogueManager dialogueManager;
+
+    public bool isBrewingScene;
+    public BrewingDialogueManager brewingDialogueManager;
     public PlayerController playerController;
     private void Awake()
     {
@@ -42,8 +45,15 @@ public class SceneStart : MonoBehaviour
 
     private void StartIntroDialogue()
     {
-        playerController.ForceStartInteraction(startDialogueData); //force starts the dialogue despite having no dialogue collider etc. Yeah i know this is a bit of a hack...  
-        dialogueManager.PlayDialogue(startDialogueData);
+        if (!isBrewingScene)
+        {
+            playerController.ForceStartInteraction(startDialogueData); //force starts the dialogue despite having no dialogue collider etc. Yeah i know this is a bit of a hack...  
+            dialogueManager.PlayDialogue(startDialogueData);
+        } // its only getting hackier from here 
+        else
+        {
+            brewingDialogueManager.PlayDialogue(startDialogueData);
+        }
         
     }
 
