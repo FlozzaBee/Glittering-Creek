@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SceneStart : MonoBehaviour
 {
@@ -55,6 +56,25 @@ public class SceneStart : MonoBehaviour
             brewingDialogueManager.PlayDialogue(startDialogueData);
         }
         
+    }
+    public void FadeOutToScene(string sceneName)
+    {
+        StartCoroutine(FadeOut(sceneName));
+    }
+
+    IEnumerator FadeOut(string sceneName) //Interpolates between 0% opacity and 100% opacity over fadeTime seconds, then changes scene to nextScene
+    {
+        Debug.Log("started fade out");
+        float fadeFactor = 0;
+        Color fadeColor = fade.color;
+        while (fadeFactor < 1)
+        {
+            fadeFactor += Time.deltaTime / fadeTime;
+            fadeColor.a = Mathf.Lerp(0, 1, fadeFactor);
+            fade.color = fadeColor;
+            yield return new WaitForFixedUpdate();
+        }
+        SceneManager.LoadScene(sceneName);
     }
 
 }

@@ -159,7 +159,7 @@ Camera:
   m_GameObject: {fileID: 709706887}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -177,7 +177,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 11.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -252,6 +252,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MageHouseScene
       objectReference: {fileID: 0}
+    - target: {fileID: 168728610901952286, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+      propertyPath: fadeTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 168728610994655456, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -270,15 +274,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 168728611528246137, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14
+      value: -5.25
       objectReference: {fileID: 0}
     - target: {fileID: 168728611528246137, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 168728611555276083, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168728611576829647, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+      propertyPath: sceneName
+      value: Day1_Garden_3
       objectReference: {fileID: 0}
     - target: {fileID: 168728611680474877, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_AnchorMax.y
@@ -410,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016745859159746484, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2016745859159746484, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,6 +462,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+--- !u!114 &1022377907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 168728610637013280, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+  m_PrefabInstance: {fileID: 1022377906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e63792b1eef1b46ba3db7d7ff52c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1022377908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 168728611242540356, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+  m_PrefabInstance: {fileID: 1022377906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d6d1f33ce83da4eb237bcc50b04a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1639842665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1639842667}
+  - component: {fileID: 1639842666}
+  m_Layer: 0
+  m_Name: InventoryPersistant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1639842666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639842665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ebce6109030740b6ed221102af4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invItemIcons:
+  - {fileID: 21300000, guid: dfedb2e62e8cc8d43b6dd1644cc02f7b, type: 3}
+  invItemNames:
+  - potion of wheat vision!
+  currentRecipe: {fileID: 0}
+--- !u!4 &1639842667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639842665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 491.8052, y: 288.83426, z: -0.2878065}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1885421434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -466,8 +545,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4900000, guid: 59a61f4591cf574439a4902a704eb7a0, type: 3}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: sprite1
+      value: 
+      objectReference: {fileID: 21300000, guid: 228f50704f9fd9b4cbbfe2e8c5a4be6f, type: 3}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: hasAction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: isDelivery
@@ -479,19 +562,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
-      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1022377907}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1022377908}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetRecipeText
+      value: ResetRecipe
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetRecipeText
+      value: RemoveItem
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -507,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: RecipeManager, Assembly-CSharp
+      value: InvManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -520,7 +615,7 @@ PrefabInstance:
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 5443629460318546241, guid: 33b647e2ccc45544f928654b09ed63e4, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: 
@@ -528,7 +623,11 @@ PrefabInstance:
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 5443629460318546241, guid: 33b647e2ccc45544f928654b09ed63e4, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: potion of wheat vision!
+      objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
       value: 
@@ -539,11 +638,11 @@ PrefabInstance:
       objectReference: {fileID: 5443629460318546241, guid: 33b647e2ccc45544f928654b09ed63e4, type: 3}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -559,11 +658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_LocalPosition.z

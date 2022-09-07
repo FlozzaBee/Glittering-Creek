@@ -25,13 +25,22 @@ public class BrewingManager : MonoBehaviour
     public GameObject radialHighlight;
     public Image finalPotionImage;
 
+    [Header("Settings")]
+    public bool allowMultipleBrews = false;
+    public bool requireSpecificPotion = false;
+    public string requiredPotion;
+
     [Header("Buttons")]
     public Button tryAgain;
     public Button brewAnother;
     public Button finishBrewing;
+    public Button wrongPotion;
 
     [Header("animation")]
     public Animator brewingAnimator;
+
+    [Header("Audio")]
+    public AudioSource splash;
 
     [Header("debugging/fun")]
     public bool unlockAll = false;
@@ -83,6 +92,8 @@ public class BrewingManager : MonoBehaviour
         else
         {
             SetPotionProperties(ingredient);
+            splash.Play();
+            splash.pitch = 1 + Random.Range(-0.5f, 0.5f);
         }
     }
 
@@ -105,19 +116,49 @@ public class BrewingManager : MonoBehaviour
         {
             int potionIndex = potionRecipes.IndexOf(currentPotion.Trim());
             finalPotionText.text = potions[potionIndex] + "!";
-            if (!unlockAll)
+            if (requireSpecificPotion) // if a specific potion is required
             {
-                //Debug.Log("You made a " + potions[potionRecipes.IndexOf(currentPotion.Trim())]);
-                InvPersistant.Instance.RemoveItems(usedIngredients);
+                if (potions[potionIndex] == requiredPotion) //check for the potion
+                { //if specific potion is found, enable potion end screen, set sprite, text, etc.
+                    if (!unlockAll)
+                    {
+                        //Debug.Log("You made a " + potions[potionRecipes.IndexOf(currentPotion.Trim())]);
+                        InvPersistant.Instance.RemoveItems(usedIngredients);
+                    }
+                    InvPersistant.Instance.AddItem(potions[potionIndex], potionSprites[potionIndex]);
+                    finishBrewing.gameObject.SetActive(true);
+                    finalPotionImage.gameObject.SetActive(true);
+                    finalPotionImage.sprite = potionSprites[potionIndex];
+                    radialHighlight.SetActive(true);
+                }
+                else //if the made potion is wrong
+                {
+                    //Show potion end screen with relevent potion
+                    finalPotionImage.gameObject.SetActive(true);
+                    finalPotionImage.sprite = potionSprites[potionIndex];
+                    radialHighlight.SetActive(true);
+                    wrongPotion.gameObject.SetActive(true); //enables the "wrong potion, try again" button
+                }
             }
-            InvPersistant.Instance.AddItem(potions[potionIndex], potionSprites[potionIndex]);
-            finishBrewing.gameObject.SetActive(true);
-            finalPotionImage.gameObject.SetActive(true);
-            finalPotionImage.sprite = potionSprites[potionIndex];
-            radialHighlight.SetActive(true);
-            if (InvPersistant.Instance.invItemNames.Count < 9) //Prevents brewing extra if inv full
+            else //if no specific potion is required
             {
-                brewAnother.gameObject.SetActive(true);
+                if (!unlockAll)
+                {
+                    //Debug.Log("You made a " + potions[potionRecipes.IndexOf(currentPotion.Trim())]);
+                    InvPersistant.Instance.RemoveItems(usedIngredients);
+                }
+                InvPersistant.Instance.AddItem(potions[potionIndex], potionSprites[potionIndex]);
+                finishBrewing.gameObject.SetActive(true);
+                finalPotionImage.gameObject.SetActive(true);
+                finalPotionImage.sprite = potionSprites[potionIndex];
+                radialHighlight.SetActive(true);
+                if (InvPersistant.Instance.invItemNames.Count < 9) //Prevents brewing extra if inv full
+                {
+                    if (allowMultipleBrews) //If brewing multiple potions per brewing scene is allowed, enable the brew another button.
+                    {
+                        brewAnother.gameObject.SetActive(true);
+                    }
+                }
             }
         }
         else

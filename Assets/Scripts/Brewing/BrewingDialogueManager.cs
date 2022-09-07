@@ -21,6 +21,7 @@ public class BrewingDialogueManager : MonoBehaviour
     public Canvas mainCanvas;
     [Tooltip("The canvas to attach specifically dialogue to")]
     public Canvas dialogueCanvas;
+    public BrewingDialogueInput brewingDialogueInput;
 
 
     //Internal Variables
@@ -31,6 +32,7 @@ public class BrewingDialogueManager : MonoBehaviour
     private Story story;
     //Portrait
     private Sprite sprite;
+    private Sprite sprite1;
     private GameObject portrait;
     //Background
     private GameObject uiBackgroundObj;
@@ -47,6 +49,7 @@ public class BrewingDialogueManager : MonoBehaviour
             interactionData = interactedObject.GetComponent<InteractionData>();
             inkJSON = interactionData.inkJSON;
             sprite = interactionData.sprite;
+            sprite1 = interactionData.sprite1;
             StartStory();
             Debug.Log("story started");
         }
@@ -101,6 +104,10 @@ public class BrewingDialogueManager : MonoBehaviour
         portrait.GetComponent<Image>().sprite = sprite;
         portrait.transform.SetParent(mainCanvas.transform, false);
 
+        List<string> tags = story.currentTags;
+
+        SetSprite(tags);
+
         isAction = false; //resets isAction for multiple actions in a scene
         //Watch for change in "action" variable within Ink. if it changes, update isAction
         if (interactionData.hasAction)
@@ -125,6 +132,11 @@ public class BrewingDialogueManager : MonoBehaviour
             DestroyChildren();
             CreateContentView(story.Continue());
             Debug.Log("continued story");
+
+            //tags & sprite changing 
+            List<string> tags = story.currentTags;
+
+            SetSprite(tags);
         }
         else //When no more dialogue is available, deletes dialogue UI & returns player control
         {
@@ -137,6 +149,7 @@ public class BrewingDialogueManager : MonoBehaviour
                 interactionObject.SetActive(false); //resets interaction data
             }
             interactionObject = null; //resets interaction object so you can interact with teh same object again
+            brewingDialogueInput.dialogueData = null;
         }
     }
 
@@ -190,5 +203,31 @@ public class BrewingDialogueManager : MonoBehaviour
     {
         story.ChooseChoiceIndex(choice.index);
         ContinueStory();
+    }
+
+    private void SetSprite(List<string> spriteTags)
+    {
+        Image portraitImage = portrait.GetComponent<Image>();
+        if (spriteTags.Contains("1"))
+        {
+            portraitImage.sprite = sprite;
+        }
+        if (spriteTags.Contains("2"))
+        {
+            portraitImage.sprite = sprite1;
+        }
+        if (spriteTags.Contains("3"))
+        {
+            portraitImage.color = new Color(0.5f, 0.5f, 0.5f);
+        }
+        else
+        {
+            portraitImage.color = new Color(1, 1, 1);
+        }
+
+        if (spriteTags.Count == 0)
+        {
+            Debug.Log("no tags");
+        }
     }
 }

@@ -10,6 +10,7 @@ public class InteractionData : MonoBehaviour
     public TextAsset inkJSON;
     [Header("Icon/portrait")]
     public Sprite sprite;
+    public Sprite sprite1;
     public bool useFullbodyPortraitPrefab = false;
     [Header("Can you interact with this object multiple times?")]
     public bool isSingleUse;
@@ -21,5 +22,11 @@ public class InteractionData : MonoBehaviour
     [Header("Potion delivery")]
     public bool isDelivery = false;
     public string requiredItem;
+
+
+    public void DisableInteractedObject()
+    {
+        gameObject.SetActive(false);
+    }
 
 }

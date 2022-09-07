@@ -33,12 +33,14 @@ public class DialogueManager : MonoBehaviour
     private Story story;
         //Portrait
     private Sprite sprite;
+    private Sprite sprite1;
     private GameObject portrait;
         //Background
     private GameObject uiBackgroundObj;
 
         //Ink variable check
     private bool isAction = false;
+    private bool hasDoneAction = false;
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class DialogueManager : MonoBehaviour
             interactionData = interactedObject.GetComponent<InteractionData>();
             inkJSON = interactionData.inkJSON;
             sprite = interactionData.sprite;
+            sprite1 = interactionData.sprite1;
             StartStory();
         }
         //if(inkJSON != interactedInkJSON)
@@ -98,9 +101,11 @@ public class DialogueManager : MonoBehaviour
             story.variablesState["hasDeliveryItem"] = CheckForItem();
         }
         CreateContentView(story.Continue()); //Generates initial line of dialogue
+        List<string> tags = story.currentTags;
+        
 
         //Creates portrait, makes it child of main canvas
-        if(interactionData.useFullbodyPortraitPrefab)
+        if (interactionData.useFullbodyPortraitPrefab)
         {
             portrait = Instantiate(fullbodyPrefab);
         }
@@ -111,6 +116,9 @@ public class DialogueManager : MonoBehaviour
         portrait.GetComponent<Image>().sprite = sprite;
         portrait.transform.SetParent(mainCanvas.transform, false);
 
+        SetSprite(tags); //sets the portrait sprite and sprite color depending on the tag (#1, #2, and #3) in the inky file
+
+        
         playerController.invManager.ShowHotbar(false); //Hides the hotbar
         playerController.moveEnabled = false; //Disables player movement while in dialogue
 
@@ -130,13 +138,20 @@ public class DialogueManager : MonoBehaviour
     {
         if (isAction)
         {
-            interactionData.postDialogueEvent.Invoke();
+            if (!hasDoneAction)
+            {
+                interactionData.postDialogueEvent.Invoke();
+            }
         }
         if (story.canContinue)
         {
             // Debug.Log(story.Continue());
             DestroyChildren();
             CreateContentView(story.Continue());
+            List<string> tags = story.currentTags;
+            
+            SetSprite(tags);
+
         }
         else //When no more dialogue is available, deletes dialogue UI & returns player control
         {
@@ -147,7 +162,8 @@ public class DialogueManager : MonoBehaviour
             Destroy(uiBackgroundObj);
             if(interactionData.isSingleUse) //If the dialogue is set as single use, disable it after use.
             {
-                interactionObject.SetActive(false);
+                //interactionObject.SetActive(false);
+                interactionObject.GetComponent<Collider2D>().enabled = false; //disables the trigger collider 
                 playerController.ForceEndInteraction(); // disables all interaction icons and resets interaction data
             }
             playerController.invManager.ShowHotbar(true); //unhides the hotbar
@@ -222,6 +238,32 @@ public class DialogueManager : MonoBehaviour
     {
         interactionObject.SetActive(false);
         playerController.ForceEndInteraction(); // disables all interaction icons and resets interaction data
+    }
+
+    private void SetSprite(List<string> spriteTags)
+    {
+        Image portraitImage = portrait.GetComponent<Image>();
+        if (spriteTags.Contains("1"))
+        {
+            portraitImage.sprite = sprite;
+        }
+        if (spriteTags.Contains("2"))
+        {
+            portraitImage.sprite = sprite1;
+        }
+        if(spriteTags.Contains("3"))
+        {
+            portraitImage.color = new Color(0.5f, 0.5f, 0.5f);
+        }
+        else
+        {
+            portraitImage.color = new Color(1, 1, 1);
+        }
+
+        if (spriteTags.Count == 0)
+        {
+            Debug.Log("no tags");
+        }
     }
 
 }

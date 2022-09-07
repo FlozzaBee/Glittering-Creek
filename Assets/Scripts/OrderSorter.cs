@@ -12,7 +12,7 @@ public class OrderSorter : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y);
     }
     private void Update()

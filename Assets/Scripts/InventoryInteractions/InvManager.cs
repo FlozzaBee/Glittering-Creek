@@ -61,19 +61,22 @@ public class InvManager : MonoBehaviour
         { Debug.Log("Inventory Interact Data not assigned"); }
         else
         {
-            if (InvPersistant.Instance.invItemIcons.Count < 9)
+            if (!InvPersistant.Instance.invItemNames.Contains(data.objectName))
             {
-                InvPersistant.Instance.invItemIcons.Add(data.objectIcon);
-                InvPersistant.Instance.invItemNames.Add(data.objectName);
-                if (data.isSingleUse)
+                if (InvPersistant.Instance.invItemIcons.Count < 9)
                 {
-                    data.DisableObject(); //just realised this could have just been a data.gameobject.setactive 
+                    InvPersistant.Instance.invItemIcons.Add(data.objectIcon);
+                    InvPersistant.Instance.invItemNames.Add(data.objectName);
+                    if (data.isSingleUse)
+                    {
+                        data.DisableObject(); //just realised this could have just been a data.gameobject.setactive 
+                    }
                 }
+                else
+                { Debug.Log("inventory full!"); }
             }
-            else
-            {
-                Debug.Log("inventory full!");
-            }
+            else { Debug.Log("you already have one of those"); }
+            
         }
         UpdateHotbar();
         
@@ -144,6 +147,23 @@ public class InvManager : MonoBehaviour
                 InvPersistant.Instance.invItemIcons.RemoveAt(index);
             }
             else { Debug.Log("Used item Icon not found in inventory"); }
+        }
+    }
+
+    public void RemoveItem(string name) //Used to remove items during a dialogue action.
+    {
+        
+        int index = InvPersistant.Instance.invItemNames.IndexOf(name); //find the position in the inventory list of that name
+                                                                       //remove the item (name and icon) at that position
+        if (index == -1)
+        {
+            Debug.Log("Item to be removed not found");
+        }
+        else
+        {
+            InvPersistant.Instance.invItemNames.RemoveAt(index);
+            InvPersistant.Instance.invItemIcons.RemoveAt(index);
+            UpdateHotbar();
         }
     }
     public void AddItem(string itemName, Sprite itemIcon)

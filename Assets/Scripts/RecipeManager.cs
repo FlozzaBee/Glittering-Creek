@@ -45,4 +45,10 @@ public class RecipeManager : MonoBehaviour
         Debug.Log("recipe set");
         recipeViewButton.gameObject.SetActive(true);
     }
+
+    public void ResetRecipe()
+    {
+        InvPersistant.Instance.currentRecipe = null;
+        recipeViewButton.gameObject.SetActive(false);
+    }
 }

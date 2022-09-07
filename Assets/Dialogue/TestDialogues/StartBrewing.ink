@@ -1,12 +1,9 @@
 VAR action = false
 
-would you like to start brewing?
-* [yes]
-lets begin
-~ startBrew()
-->END
-* [no]
-ok, come back when you do
-->END
-=== function startBrew() ===
+
+its wheat time babee
+~act()
+yeah
+
+=== function act() ===
 ~ action = true

@@ -33,6 +33,9 @@ public class BrewingDialogueInput : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext context)
     {
-        brewingDialogueManager.PlayDialogue(dialogueData);
+        if (dialogueData != null)
+        {
+            brewingDialogueManager.PlayDialogue(dialogueData);
+        }
     }
 }

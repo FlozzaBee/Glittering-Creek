@@ -680,6 +680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: 2e08d289a7c34ed498649941004bba4a, type: 3}
   sprite: {fileID: 21300000, guid: ee76bb56db2da40428eed1623596155d, type: 3}
+  sprite1: {fileID: 0}
   useFullbodyPortraitPrefab: 0
   isSingleUse: 0
   hasAction: 0
@@ -819,6 +820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: 1af8150e89001c444a66f30194f691f5, type: 3}
   sprite: {fileID: 21300000, guid: 56b7a0038263759439f4d771e679799e, type: 3}
+  sprite1: {fileID: 0}
   useFullbodyPortraitPrefab: 0
   isSingleUse: 0
   hasAction: 1
@@ -914,6 +916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: e8977f7f7f2091d4daff262c7d9de176, type: 3}
   sprite: {fileID: 21300000, guid: 56b7a0038263759439f4d771e679799e, type: 3}
+  sprite1: {fileID: 0}
   useFullbodyPortraitPrefab: 0
   isSingleUse: 0
   hasAction: 0
@@ -1024,6 +1027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: fd8183c3d9ff5dd46abc4bbf951adb49, type: 3}
   sprite: {fileID: 21300000, guid: 56b7a0038263759439f4d771e679799e, type: 3}
+  sprite1: {fileID: 0}
   useFullbodyPortraitPrefab: 0
   isSingleUse: 0
   hasAction: 1
@@ -1436,6 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJSON: {fileID: 4900000, guid: 263f04278b364c14a96ea579d2b87d8e, type: 3}
   sprite: {fileID: 21300000, guid: 228f50704f9fd9b4cbbfe2e8c5a4be6f, type: 3}
+  sprite1: {fileID: 0}
   useFullbodyPortraitPrefab: 1
   isSingleUse: 1
   hasAction: 0
@@ -1523,6 +1528,10 @@ PrefabInstance:
     - target: {fileID: 61721383894312755, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_Name
       value: MageHouseScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 168728610901952286, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+      propertyPath: fadeTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 168728610901952286, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: startDialogueData
@@ -1684,6 +1693,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 189072364298862346, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2016745859159746484, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1727,6 +1740,14 @@ PrefabInstance:
     - target: {fileID: 2016745859159746484, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744203542796272046, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7443521606174865876, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3de0638b8948cb8438bd93ec665a1f86, type: 3}
@@ -2263,6 +2284,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: inkJSON
+      value: 
+      objectReference: {fileID: 4900000, guid: 566247c5cd4667b479bc6c13bb34e7f7, type: 3}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: sprite1
+      value: 
+      objectReference: {fileID: 21300000, guid: 228f50704f9fd9b4cbbfe2e8c5a4be6f, type: 3}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 891446915}
@@ -2282,17 +2311,21 @@ PrefabInstance:
       propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 622133435}
+    - target: {fileID: 7232756130341308164, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
+      propertyPath: postDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Brewing
+      objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.44
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7232756130341308216, guid: c12da57c87c681241b0dec9f1ce73e83, type: 3}
       propertyPath: m_LocalPosition.z
